@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Hướng dẫn KPI cá nhân — Cao đẳng Việt Mỹ</title>
+<style>
+  :root{
+    --navy:#1B2B4B; --red:#8B1A2B; --gold:#C8A24B;
+    --paper:#FFFFFF; --bg:#F5F6F8; --ink:#1F2430; --ink-soft:#5B6474; --line:#E3E6EC;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  header.top{background:var(--navy);color:#fff;padding:24px 20px 0;position:sticky;top:0;z-index:20;}
+  .top-inner{max-width:840px;margin:0 auto;}
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px;}
+  h1{font-family:Georgia,'Times New Roman',serif;font-size:23px;margin:0 0 4px;line-height:1.3;}
+  .sub{color:#C9D2E3;font-size:13px;margin-bottom:16px;}
+  nav.tabs{display:flex;gap:0;border-top:1px solid #33436A;}
+  nav.tabs button{
+    flex:1;background:none;border:none;cursor:pointer;text-align:center;color:#C9D2E3;
+    font-family:inherit;font-size:13px;font-weight:600;padding:12px 8px;border-bottom:3px solid transparent;
+  }
+  nav.tabs button:hover{color:#fff;}
+  nav.tabs button.active{color:#fff;border-bottom-color:var(--gold);}
+  main{max-width:840px;margin:0 auto;padding:26px 20px 60px;}
+  .panel{display:none;animation:fadein .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .notice{background:#FBF6EA;border:1px solid var(--gold);border-radius:6px;padding:13px 15px;font-size:13px;color:#6b5a2a;margin-bottom:24px;}
+  h2.ptitle{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--navy);margin:0 0 14px;}
+  h3{font-size:14.5px;color:var(--navy);margin:16px 0 6px;}
+  p{margin:0 0 10px;font-size:14.5px;}
+  .lead{font-size:15px;background:var(--paper);border-left:4px solid var(--gold);padding:13px 15px;border-radius:0 6px 6px 0;margin-bottom:18px;}
+
+  /* Quiz */
+  .quiz{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:20px;}
+  .quiz-q{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:10px;}
+  .quiz-btns{display:flex;gap:10px;}
+  .quiz-btns button{
+    flex:1;padding:10px;border-radius:6px;border:1px solid var(--line);background:#fff;
+    cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--navy);transition:.15s;
+  }
+  .quiz-btns button:hover{background:var(--navy);color:#fff;}
+  .quiz-result{margin-top:12px;padding:12px 14px;border-radius:6px;font-size:13.5px;display:none;}
+  .quiz-result.show{display:block;animation:fadein .2s ease;}
+  .quiz-result.a{background:#EAF0FF;border:1px solid var(--navy);}
+  .quiz-result.b{background:#FBF6EA;border:1px solid var(--gold);}
+  .quiz-result.c{background:#FBEDEC;border:1px solid var(--red);}
+  .quiz-reset{background:none;border:none;color:var(--ink-soft);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:8px;padding:0;}
+
+  .blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 20px;}
+  .block-card{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:6px;padding:12px;font-size:13px;cursor:pointer;transition:.15s;}
+  .block-card:hover{box-shadow:0 3px 10px rgba(27,43,75,.12);transform:translateY(-2px);}
+  .block-card.b{border-top-color:var(--gold);}
+  .block-card.c{border-top-color:var(--red);}
+  .block-card .pct{font-size:20px;font-weight:700;color:var(--navy);}
+  .block-card .view-ex{font-size:11.5px;color:var(--gold);font-weight:700;margin-top:8px;display:block;}
+
+  /* Accordion */
+  .acc{border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px;background:var(--paper);}
+  .acc-head{
+    display:flex;justify-content:space-between;align-items:center;padding:12px 14px;
+    cursor:pointer;font-size:13.5px;font-weight:600;color:var(--navy);user-select:none;
+  }
+  .acc-head:hover{background:#FAFBFC;}
+  .acc-head .arrow{transition:transform .2s;color:var(--gold);font-size:12px;}
+  .acc.open .acc-head .arrow{transform:rotate(90deg);}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:13.5px;padding:0 14px;}
+  .acc.open .acc-body{max-height:400px;padding:0 14px 14px;}
+  .formula{font-family:'IBM Plex Mono',Consolas,monospace;background:var(--navy);color:#EAF0FF;padding:11px 13px;border-radius:6px;font-size:12.5px;margin:8px 0;}
+
+  .errors{display:grid;gap:8px;margin-top:10px;}
+  .error-card{background:#FBEDEC;border:1px solid var(--red);border-radius:6px;padding:11px 13px;font-size:13px;cursor:pointer;}
+  .error-card b{color:var(--red);}
+  .error-card .detail{display:none;margin-top:6px;color:var(--ink);}
+  .error-card.open .detail{display:block;}
+
+  table{width:100%;border-collapse:collapse;background:var(--paper);font-size:12px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top;}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;}
+  tr:nth-child(even) td{background:#FAFBFC;}
+
+  /* Sub-tabs phần 2 */
+  .subtabs{display:flex;gap:8px;margin-bottom:16px;}
+  .subtabs button{
+    flex:1;padding:10px;border-radius:6px;border:1px solid var(--line);background:var(--paper);
+    cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);
+  }
+  .subtabs button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* Wizard */
+  .wizard{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px;}
+  .wiz-dots{display:flex;gap:6px;margin-bottom:16px;}
+  .wiz-dots span{width:26px;height:5px;border-radius:3px;background:var(--line);transition:.2s;}
+  .wiz-dots span.on{background:var(--gold);}
+  .wiz-who{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;color:#fff;margin-bottom:10px;}
+  .wiz-who.cbnv{background:var(--navy);}
+  .wiz-who.ql{background:var(--gold);}
+  .wiz-who.hr{background:var(--red);}
+  .wiz-title{font-size:15.5px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+  .wiz-body{font-size:13.5px;margin-bottom:14px;}
+  .wiz-branches{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px;}
+  .wiz-branch{border-radius:6px;padding:10px 12px;font-size:12.5px;}
+  .wiz-branch.reject{background:#FBEDEC;border:1px solid var(--red);}
+  .wiz-branch.approve{background:#EAF6EE;border:1px solid #2E7D4F;}
+  .wiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+  .wiz-nav button{
+    padding:9px 16px;border-radius:6px;border:none;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  }
+  .wiz-nav .prev{background:#EFF1F5;color:var(--ink-soft);}
+  .wiz-nav .prev:disabled{opacity:.4;cursor:default;}
+  .wiz-nav .next{background:var(--navy);color:#fff;}
+  .must-rule{background:#FBF6EA;border:1px solid var(--gold);border-radius:6px;padding:10px 13px;font-size:12.5px;margin-top:12px;color:#6b5a2a;}
+
+  .status-list span{display:inline-block;background:var(--navy);color:#fff;font-size:11px;padding:3px 9px;border-radius:14px;margin:2px 5px 2px 0;}
+
+  .deadline-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;}
+  .dcard{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:13px 15px;}
+  .dcard .day{font-size:20px;font-weight:700;color:var(--navy);font-family:Georgia,serif;}
+  .dcard .label{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .fact-box{background:#EAF6EE;border:1px solid #2E7D4F;border-radius:6px;padding:12px 14px;font-size:13.5px;color:#1e5c37;margin-top:10px;}
+  .fact-box b{color:#164a2b;}
+  .btn-ghost{
+    background:var(--paper);border:1px solid var(--navy);color:var(--navy);font-family:inherit;
+    font-size:13px;font-weight:600;padding:9px 15px;border-radius:6px;cursor:pointer;margin-top:8px;
+  }
+  .btn-ghost:hover{background:var(--navy);color:#fff;}
+
+  /* Modal */
+  .overlay{
+    display:none;position:fixed;inset:0;background:rgba(27,43,75,.55);z-index:50;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .overlay.show{display:flex;}
+  .modal{
+    background:#fff;border-radius:10px;max-width:640px;width:100%;max-height:82vh;overflow-y:auto;
+    padding:22px;position:relative;animation:fadein .2s ease;
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;background:#F0F1F4;border:none;width:30px;height:30px;
+    border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink-soft);
+  }
+  .modal-close:hover{background:var(--red);color:#fff;}
+  .modal h3{font-size:16px;margin:0 0 4px;padding-right:30px;}
+  .modal .example-label{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;color:#fff;margin-bottom:10px;text-transform:uppercase;}
+
+  footer{max-width:840px;margin:0 auto;padding:20px 20px 40px;color:var(--ink-soft);font-size:12px;border-top:1px solid var(--line);}
+
+  @media (max-width:600px){
+    .blocks{grid-template-columns:1fr;}
+    .deadline-box{grid-template-columns:1fr;}
+    .wiz-branches{grid-template-columns:1fr;}
+    table{font-size:11px;}
+    nav.tabs button{font-size:11px;padding:10px 4px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="eyebrow">Cao đẳng Việt Mỹ · 1APC</div>
+    <h1>Hướng dẫn KPI cá nhân</h1>
+    <div class="sub">Dành cho CBNV — không cần biết trước KPI là gì</div>
+    <nav class="tabs">
+      <button class="tabbtn active" data-tab="1" onclick="switchTab(1)">1. Cách điền</button>
+      <button class="tabbtn" data-tab="2" onclick="switchTab(2)">2. Quy trình duyệt</button>
+      <button class="tabbtn" data-tab="3" onclick="switchTab(3)">3. Deadline</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="notice">
+    <b>Lưu ý:</b> Toàn bộ tên người, con số và ví dụ trong tài liệu này là <b>dữ liệu minh họa</b>, không phải KPI thật của bất kỳ cá nhân nào.
+  </div>
+
+  <!-- ============ PANEL 1 ============ -->
+  <div class="panel active" id="panel1">
+    <h2 class="ptitle">Hướng dẫn điền KPI</h2>
+    <p class="lead">KPI cá nhân là bản ghi những việc quan trọng anh/chị làm trong tháng, kèm cách nhà trường xác nhận anh/chị đã hoàn thành đến đâu — dùng để đánh giá hiệu quả công việc và tính thưởng.</p>
+
+    <h3>Kiểm tra nhanh — việc của anh/chị thuộc khối nào?</h3>
+    <div class="quiz">
+      <div class="quiz-q" id="quizQ">Việc này có lặp lại đều đặn mỗi tháng theo đúng mô tả công việc của anh/chị không?</div>
+      <div class="quiz-btns" id="quizBtns">
+        <button onclick="quizAnswer('yes')">Có, lặp lại hàng tháng</button>
+        <button onclick="quizAnswer('no')">Không, làm 1 lần / có deadline riêng</button>
+      </div>
+      <div class="quiz-result a" id="resB">→ Xếp vào <b>Khối B — Công việc thường xuyên (65%)</b>. Đây là việc theo đúng mô tả công việc, lặp lại mỗi tháng.<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
+      <div class="quiz-result b" id="resA">→ Xếp vào <b>Khối A — Trọng điểm/Dự án (20%)</b>. Đây là việc có thời hạn riêng: dự án, sự kiện, việc đột xuất.<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
+      <div class="quiz-result c" id="resC" style="display:none;">→ Việc liên quan tuân thủ nội quy hoặc đào tạo nội bộ luôn xếp vào <b>Khối C (15%)</b> — thường đã có sẵn mẫu, không cần tự thêm dòng.</div>
+    </div>
+
+    <h3>3 khối công việc — click để xem ví dụ mẫu</h3>
+    <div class="blocks">
+      <div class="block-card" onclick="openModal('A')">
+        <div class="pct">20%</div>
+        <b>A. Trọng điểm / Dự án</b>
+        <p style="font-size:12px;margin:6px 0 0;">Việc làm một lần, có deadline riêng.</p>
+        <span class="view-ex">Xem ví dụ mẫu →</span>
+      </div>
+      <div class="block-card b" onclick="openModal('B')">
+        <div class="pct">65%</div>
+        <b>B. Thường xuyên</b>
+        <p style="font-size:12px;margin:6px 0 0;">Việc lặp lại hằng tháng.</p>
+        <span class="view-ex" style="color:var(--navy);">Xem ví dụ mẫu →</span>
+      </div>
+      <div class="block-card c" onclick="openModal('C')">
+        <div class="pct">15%</div>
+        <b>C. Tuân thủ & Phát triển</b>
+        <p style="font-size:12px;margin:6px 0 0;">Áp dụng chung cho mọi người.</p>
+        <span class="view-ex" style="color:var(--red);">Xem ví dụ mẫu →</span>
+      </div>
+    </div>
+
+    <h3>Cách điền từng cột — click để mở</h3>
+    <div class="acc" onclick="toggleAcc(this)">
+      <div class="acc-head"><span>Cột "Nội dung mục tiêu"</span><span class="arrow">▶</span></div>
+      <div class="acc-body">
+        <div class="formula">Làm gì + số lượng/đối tượng cụ thể + hạn hoàn thành + cách đo</div>
+        <p>Ví dụ đúng: <i>"Hoàn thành 3 bộ đề thi giữa kỳ trước ngày 20/07, được Trưởng bộ môn duyệt."</i> Tránh viết chung chung như <i>"Hoàn thành tốt công việc được giao."</i></p>
+      </div>
+    </div>
+    <div class="acc" onclick="toggleAcc(this)">
+      <div class="acc-head"><span>Cột "Ngày HT / Tần suất"</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><p>Khối A điền ngày cụ thể (VD 20/07/2026). Khối B điền <b>"Hàng tháng"</b>.</p></div>
+    </div>
+    <div class="acc" onclick="toggleAcc(this)">
+      <div class="acc-head"><span>Cột "Cách tính / Gợi ý"</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><p>Công thức tự chấm điểm, ví dụ <i>"Số lượng hoàn thành / Số lượng kế hoạch × 100%"</i> hoặc <i>"Đạt / Không đạt theo checklist"</i>.</p></div>
+    </div>
+    <div class="acc" onclick="toggleAcc(this)">
+      <div class="acc-head"><span>Cột "Cơ sở ghi nhận"</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><p>Nơi ai đó có thể kiểm tra lại: tên file, đường dẫn hệ thống, biên bản, bảng chấm công…</p></div>
+    </div>
+    <div class="acc" onclick="toggleAcc(this)">
+      <div class="acc-head"><span>Cột "TS trong khối %" và "TS quy đổi %"</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><p>Anh/chị chỉ điền <b>"TS trong khối %"</b> — tổng các dòng trong một khối phải bằng <b>100%</b>. Cột "TS quy đổi %" hệ thống <b>tự tính</b>, không cần điền tay.</p></div>
+    </div>
+
+    <h3 style="margin-top:20px;">3 lỗi thường gặp — click để xem chi tiết</h3>
+    <div class="errors">
+      <div class="error-card" onclick="this.classList.toggle('open')">
+        <b>Lỗi 1 — Bỏ trống "Cách tính"</b>
+        <div class="detail">Nếu không ghi rõ cách chấm điểm, cuối tháng sẽ không có căn cứ để tự đánh giá, dễ tranh cãi với quản lý.</div>
+      </div>
+      <div class="error-card" onclick="this.classList.toggle('open')">
+        <b>Lỗi 2 — Tổng TS trong khối không bằng 100%</b>
+        <div class="detail">Hệ thống sẽ báo lỗi và không cho gửi. Kiểm tra tổng các dòng trong từng khối trước khi gửi.</div>
+      </div>
+      <div class="error-card" onclick="this.classList.toggle('open')">
+        <b>Lỗi 3 — Copy nguyên mô tả công việc chung chung</b>
+        <div class="detail">Câu như "Hoàn thành tốt nhiệm vụ được giao" không đo lường được — luôn cần con số hoặc mốc thời gian cụ thể.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PANEL 2 ============ -->
+  <div class="panel" id="panel2">
+    <h2 class="ptitle">Quy trình duyệt KPI</h2>
+    <p class="lead">KPI cá nhân đi qua 2 vòng duyệt: <b>vòng đăng ký</b> (đầu tháng) và <b>vòng đánh giá</b> (cuối tháng). Cả hai theo đường: <b>CBNV → Quản lý trực tiếp → HR</b>.</p>
+
+    <div class="subtabs">
+      <button class="subtabbtn active" onclick="switchFlow('reg')">Vòng 1 — Đăng ký (đầu tháng)</button>
+      <button class="subtabbtn" onclick="switchFlow('eval')">Vòng 2 — Đánh giá (cuối tháng)</button>
+    </div>
+
+    <div class="wizard">
+      <div class="wiz-dots" id="wizDots"></div>
+      <div id="wizContent"></div>
+      <div class="wiz-nav">
+        <button class="prev" id="wizPrev" onclick="wizStep(-1)">← Trước</button>
+        <span id="wizCount" style="font-size:12px;color:var(--ink-soft);"></span>
+        <button class="next" id="wizNext" onclick="wizStep(1)">Tiếp →</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:22px;">Các trạng thái anh/chị sẽ thấy trên hệ thống</h3>
+    <div class="status-list">
+      <span>Nháp</span><span>Chờ quản lý check</span><span>Yêu cầu CBNV chỉnh sửa</span>
+      <span>Gửi HR thành công</span><span>Chờ quản lý đánh giá</span><span>Yêu cầu CBNV đối chiếu</span>
+    </div>
+  </div>
+
+  <!-- ============ PANEL 3 ============ -->
+  <div class="panel" id="panel3">
+    <h2 class="ptitle">Deadline & nộp muộn</h2>
+    <p class="lead">Hệ thống nhắc lịch <b>2 lần tự động</b> mỗi tháng — nộp muộn vẫn được chấp nhận, nhưng để lại dấu vết trên hệ thống.</p>
+
+    <div class="deadline-box">
+      <div class="dcard">
+        <div class="day">Ngày cuối tháng</div>
+        <div class="label">8h00 sáng — nhắc <b>đăng ký KPI tháng mới</b> đến toàn bộ CBNV.</div>
+      </div>
+      <div class="dcard">
+        <div class="day">Ngày 5 hàng tháng</div>
+        <div class="label">8h00 sáng — email nhắc <b>đây là hạn cuối</b> đăng ký & đánh giá KPI.</div>
+      </div>
+    </div>
+
+    <button class="btn-ghost" onclick="openModal('late')">Xem ví dụ tình huống nộp muộn →</button>
+
+    <div class="fact-box" style="margin-top:16px;">
+      <b>Theo quy trình hiện hành:</b> qua hạn ngày 5, anh/chị vẫn nộp bình thường. Hệ thống <b>không khóa quyền nộp</b> — chỉ gắn nhãn <b>"Nộp muộn"</b> để Quản lý và HR theo dõi, không tự động trừ điểm.
+    </div>
+  </div>
+</main>
+
+<footer>
+  Soạn bởi Văn phòng Tổng hiệu trưởng — Equest Cao đẳng · Cập nhật: 02/07/2026
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<script>
+/* ---------- TAB SWITCH ---------- */
+function switchTab(n){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel'+n).classList.add('active');
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b.dataset.tab==n));
+  document.querySelector('main').scrollTop=0;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- ACCORDION ---------- */
+function toggleAcc(el){ el.classList.toggle('open'); }
+
+/* ---------- QUIZ ---------- */
+function quizAnswer(v){
+  document.getElementById('quizBtns').style.display='none';
+  if(v==='yes'){ document.getElementById('resB').classList.add('show'); }
+  else{ document.getElementById('resA').classList.add('show'); }
+}
+function quizReset(){
+  document.getElementById('resA').classList.remove('show');
+  document.getElementById('resB').classList.remove('show');
+  document.getElementById('quizBtns').style.display='flex';
+}
+
+/* ---------- MODAL CONTENT ---------- */
+const modalData = {
+  A: {
+    label:'Khối A — 20%', color:'#1B2B4B',
+    html:`<table>
+      <tr><th>STT</th><th>Nội dung mục tiêu</th><th>Ngày HT</th><th>Cách tính</th><th>Cơ sở ghi nhận</th><th>TS khối</th></tr>
+      <tr><td>A.1</td><td>Hoàn thành 3 bộ đề thi giữa kỳ, được Trưởng bộ môn duyệt</td><td>20/07/2026</td><td>Đạt/Không đạt theo checklist</td><td>File đề thi trên Drive</td><td>60% (12%)</td></tr>
+      <tr><td>A.2</td><td>Tham gia BTC Ngày hội việc làm 2026 đúng vai trò phân công</td><td>15/08/2026</td><td>Hoàn thành theo kế hoạch BTC</td><td>Biên bản phân công</td><td>30% (6%)</td></tr>
+      <tr><td>A.3</td><td>Rà soát, cập nhật 1 giáo trình theo chương trình mới</td><td>30/07/2026</td><td>Đạt/Không đạt</td><td>File giáo trình đã duyệt</td><td>10% (2%)</td></tr>
+    </table>`
+  },
+  B: {
+    label:'Khối B — 65%', color:'#C8A24B',
+    html:`<table>
+      <tr><th>STT</th><th>Nội dung mục tiêu</th><th>Tần suất</th><th>Cách tính</th><th>Cơ sở ghi nhận</th><th>TS khối</th></tr>
+      <tr><td>B.1</td><td>Giảng dạy đủ số tiết theo thời khóa biểu phân công</td><td>Hàng tháng</td><td>Số tiết thực dạy / phân công × 100%</td><td>Bảng chấm công</td><td>20% (13%)</td></tr>
+      <tr><td>B.2</td><td>Chấm và trả bài kiểm tra trong 7 ngày</td><td>Hàng tháng</td><td>Số bài đúng hạn / Tổng số × 100%</td><td>Hệ thống quản lý điểm</td><td>20% (13%)</td></tr>
+      <tr><td>B.3</td><td>Duy trì điểm hài lòng sinh viên ≥ 4/5</td><td>Hàng tháng</td><td>Điểm TB khảo sát cuối môn</td><td>Phiếu khảo sát</td><td>20% (13%)</td></tr>
+      <tr><td>B.4</td><td>Cập nhật điểm danh đúng ngày trên hệ thống</td><td>Hàng tháng</td><td>Số buổi đúng hạn / Tổng số × 100%</td><td>Hệ thống điểm danh</td><td>20% (13%)</td></tr>
+      <tr><td>B.5</td><td>Tham dự đầy đủ họp khoa/bộ môn định kỳ</td><td>Hàng tháng</td><td>Số buổi dự / Số buổi tổ chức × 100%</td><td>Biên bản họp</td><td>20% (13%)</td></tr>
+    </table>`
+  },
+  C: {
+    label:'Khối C — 15%', color:'#8B1A2B',
+    html:`<table>
+      <tr><th>STT</th><th>Nội dung mục tiêu</th><th>Cách tính</th><th>Cơ sở ghi nhận</th><th>TS khối</th></tr>
+      <tr><td>C.1</td><td>Tuân thủ nội quy lao động: đăng ký, đánh giá KPI đúng hạn; không vi phạm quy chế</td><td>Đạt/Không đạt</td><td>Ghi nhận phòng NSVH</td><td>50% (7.5%)</td></tr>
+      <tr><td>C.2</td><td>Tham dự đủ chương trình đào tạo nội bộ (tối thiểu 30h/năm)</td><td>Số giờ dự / 30h × 100%</td><td>Thống kê đào tạo NSVH</td><td>50% (7.5%)</td></tr>
+    </table>`
+  },
+  late:{
+    label:'Ví dụ minh họa — nộp muộn', color:'#8B1A2B',
+    html:`<p style="font-size:13.5px;">Ngày 5/07, một CBNV minh họa (Nguyễn Văn A) chưa đăng ký KPI tháng 07. Đến ngày 8/07, CBNV này mới vào hệ thống và ấn "Gửi Quản lý".</p>
+    <p style="font-size:13.5px;"><b>Hệ thống xử lý:</b> đăng ký vẫn được ghi nhận bình thường, không bị chặn. Trên màn hình admin của Quản lý và HR, dòng đăng ký này hiển thị kèm nhãn <b style="color:#8B1A2B;">"Nộp muộn"</b>.</p>
+    <p style="font-size:13.5px;"><b>Không có bước trừ điểm tự động nào xảy ra</b> — nhãn chỉ phục vụ mục đích theo dõi tần suất trễ hạn của từng người/bộ phận.</p>`
+  }
+};
+function openModal(key){
+  const d = modalData[key];
+  document.getElementById('modalBox').innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="example-label" style="background:${d.color};">${d.label}</span>
+    <h3>${key==='late' ? 'Tình huống minh họa' : 'Ví dụ điền mẫu (dữ liệu minh họa)'}</h3>
+    ${d.html}
+  `;
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('show'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ---------- WIZARD (Phần 2) ---------- */
+const flows = {
+  reg: [
+    {who:'cbnv',label:'CBNV',title:'Bước 1 — CBNV gửi đăng ký',
+     body:'CBNV điền form KPI tháng mới → ấn <b>"Gửi Quản lý"</b>. Dữ liệu bị khóa, trạng thái chuyển <b>"Chờ quản lý check"</b>, hệ thống gửi email cho quản lý trực tiếp.'},
+    {who:'ql',label:'Quản lý',title:'Bước 2 — Quản lý xem xét & quyết định',
+     body:'Quản lý mở link trong email (hoặc KPI → Check KPI nhân viên), đọc và ghi chú nhận xét — sau đó chọn 1 trong 2 hướng:',
+     branches:[
+       {type:'reject', text:'<b>Gửi CBNV</b> — cần chỉnh sửa. Trạng thái "Yêu cầu CBNV chỉnh sửa". CBNV sửa lại và gửi lại Quản lý.'},
+       {type:'approve', text:'<b>Gửi HR</b> — không cần sửa. Trạng thái "Gửi HR thành công".'}
+     ]},
+    {who:'hr',label:'HR',title:'Bước 3 — Hoàn tất',
+     body:'HR nhận email, vào ghi nhận — hoàn tất vòng đăng ký. Nếu ở bước 2 bị yêu cầu chỉnh sửa, quy trình quay lại Bước 1 cho đến khi Quản lý đồng ý.'}
+  ],
+  eval: [
+    {who:'cbnv',label:'CBNV',title:'Bước 1 — CBNV tự đánh giá',
+     body:'CBNV mở lại tháng đã đăng ký, điền <b>% tự đánh giá</b> cho từng dòng → ấn <b>Gửi Quản lý</b>. Trạng thái: "Chờ quản lý đánh giá".'},
+    {who:'ql',label:'Quản lý',title:'Bước 2 — Quản lý đánh giá & xếp loại',
+     body:'Quản lý điền % đánh giá của mình. Hệ thống tự tính <b>Kết quả cuối, Kết quả sau quy đổi và Xếp loại (A*/A/B/C)</b>.'},
+    {who:'cbnv',label:'CBNV',title:'Bước 3 — CBNV đối chiếu (bắt buộc)',
+     body:'CBNV nhận email "Yêu cầu đối chiếu", xem lại đánh giá của Quản lý và xác nhận thống nhất.',
+     rule:'Quy tắc bắt buộc: Quản lý phải ấn "Gửi CBNV" để đối chiếu trước, sau đó mới được ấn "Gửi HR" — CBNV luôn có quyền xem và phản hồi kết quả trước khi bị chốt.'},
+    {who:'hr',label:'HR',title:'Bước 4 — Gửi HR, hoàn tất',
+     body:'Quản lý ấn <b>"Gửi HR"</b> sau khi đã thống nhất với CBNV. Trạng thái "Gửi HR thành công" — HR ghi nhận, hoàn tất vòng đánh giá.'}
+  ]
+};
+let curFlow='reg', curStep=0;
+
+function switchFlow(f){
+  curFlow=f; curStep=0;
+  document.querySelectorAll('.subtabbtn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderWiz();
+}
+function wizStep(dir){
+  const steps=flows[curFlow];
+  curStep=Math.min(Math.max(curStep+dir,0),steps.length-1);
+  renderWiz();
+}
+function renderWiz(){
+  const steps=flows[curFlow];
+  const s=steps[curStep];
+  document.getElementById('wizDots').innerHTML = steps.map((_,i)=>`<span class="${i<=curStep?'on':''}"></span>`).join('');
+  let branchHtml='';
+  if(s.branches){
+    branchHtml = '<div class="wiz-branches">'+s.branches.map(b=>`<div class="wiz-branch ${b.type}">${b.text}</div>`).join('')+'</div>';
+  }
+  let ruleHtml = s.rule ? `<div class="must-rule"><b></b>${s.rule}</div>` : '';
+  document.getElementById('wizContent').innerHTML = `
+    <span class="wiz-who ${s.who}">${s.label}</span>
+    <div class="wiz-title">${s.title}</div>
+    <div class="wiz-body">${s.body}</div>
+    ${branchHtml}${ruleHtml}
+  `;
+  document.getElementById('wizPrev').disabled = curStep===0;
+  document.getElementById('wizNext').style.display = curStep===steps.length-1 ? 'none':'inline-block';
+  document.getElementById('wizCount').textContent = `Bước ${curStep+1}/${steps.length}`;
+}
+renderWiz();
+</script>
+</body>
+</html>
