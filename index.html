@@ -33,7 +33,10 @@
   h2.ptitle{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--navy);margin:0 0 14px;}
   h3{font-size:14.5px;color:var(--navy);margin:16px 0 6px;}
   p{margin:0 0 10px;font-size:14.5px;}
-  .lead{font-size:15px;background:var(--paper);border-left:4px solid var(--gold);padding:13px 15px;border-radius:0 6px 6px 0;margin-bottom:18px;}
+  .lead{font-size:15px;background:var(--paper);border-left:4px solid var(--gold);padding:13px 15px;border-radius:0 6px 6px 0;margin-bottom:10px;}
+  .lead-list{margin:0 0 18px;padding-left:20px;font-size:14px;}
+  .lead-list li{margin-bottom:5px;}
+  .lead-list b{color:var(--navy);}
 
   /* Quiz */
   .quiz{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:20px;}
@@ -181,7 +184,13 @@
   <!-- ============ PANEL 1 ============ -->
   <div class="panel active" id="panel1">
     <h2 class="ptitle">Hướng dẫn điền KPI</h2>
-    <p class="lead">KPI cá nhân là bản ghi những việc quan trọng anh/chị làm trong tháng, kèm cách nhà trường xác nhận anh/chị đã hoàn thành đến đâu — dùng để đánh giá hiệu quả công việc và tính thưởng.</p>
+    <p class="lead">KPI cá nhân là các mục tiêu và chỉ số dùng để đo lường mức độ hoàn thành công việc của mỗi cá nhân trong một tháng, dựa trên chức năng, nhiệm vụ và mục tiêu của phòng/khoa.</p>
+    <p style="margin-top:-6px;">Mỗi KPI đều phải được xác định rõ:</p>
+    <ul class="lead-list">
+      <li><b>Mục tiêu công việc</b> cần đạt</li>
+      <li><b>Cách tính kết quả</b> hoặc tiêu chí đánh giá</li>
+      <li><b>Cơ sở ghi nhận</b> (báo cáo, hệ thống, hồ sơ, dữ liệu…) để đảm bảo việc đánh giá khách quan và minh bạch</li>
+    </ul>
 
     <h3>Kiểm tra nhanh — việc của anh/chị thuộc khối nào?</h3>
     <div class="quiz">
@@ -190,29 +199,30 @@
         <button onclick="quizAnswer('yes')">Có, lặp lại hàng tháng</button>
         <button onclick="quizAnswer('no')">Không, làm 1 lần / có deadline riêng</button>
       </div>
-      <div class="quiz-result a" id="resB">→ Xếp vào <b>Khối B — Công việc thường xuyên (65%)</b>. Đây là việc theo đúng mô tả công việc, lặp lại mỗi tháng.<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
-      <div class="quiz-result b" id="resA">→ Xếp vào <b>Khối A — Trọng điểm/Dự án (20%)</b>. Đây là việc có thời hạn riêng: dự án, sự kiện, việc đột xuất.<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
-      <div class="quiz-result c" id="resC" style="display:none;">→ Việc liên quan tuân thủ nội quy hoặc đào tạo nội bộ luôn xếp vào <b>Khối C (15%)</b> — thường đã có sẵn mẫu, không cần tự thêm dòng.</div>
+      <div class="quiz-result a" id="resB">→ Xếp vào <b>Khối B — Công việc thường xuyên</b>. Đây là việc theo đúng mô tả công việc, lặp lại mỗi tháng — liệt kê tối đa <b>5 việc/tháng</b> (gộp nhóm nếu việc nhỏ).<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
+      <div class="quiz-result b" id="resA">→ Xếp vào <b>Khối A — Trọng điểm/Dự án</b>. Đây là việc có thời hạn riêng: dự án, sự kiện, việc đột xuất — tối đa <b>3 việc/tháng</b>.<br><button class="quiz-reset" onclick="quizReset()">Kiểm tra lại</button></div>
+      <div class="quiz-result c" id="resC" style="display:none;">→ Việc liên quan tuân thủ nội quy hoặc đào tạo nội bộ luôn xếp vào <b>Khối C (15% cố định)</b> — thường đã có sẵn mẫu, không cần tự thêm dòng.</div>
     </div>
 
     <h3>3 khối công việc — click để xem ví dụ mẫu</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:-4px;">Tỉ trọng <b style="color:var(--navy);">Khối A + Khối B luôn bằng 85%</b> — tỉ lệ mỗi phần phụ thuộc vai trò và mức đóng góp thực tế trong tháng, do quản lý phê duyệt. Khối C cố định 15%.</p>
     <div class="blocks">
       <div class="block-card" onclick="openModal('A')">
-        <div class="pct">20%</div>
-        <b>A. Trọng điểm / Dự án</b>
-        <p style="font-size:12px;margin:6px 0 0;">Việc làm một lần, có deadline riêng.</p>
+        <div class="pct">A+B</div>
+        <b>A. Công việc dự án / trọng điểm / không thường xuyên</b>
+        <p style="font-size:12px;margin:6px 0 0;">Công việc trọng điểm, dự án lớn liên quan phát triển chung của phòng/OKR trường. Tối đa 3 việc/tháng.</p>
         <span class="view-ex">Xem ví dụ mẫu →</span>
       </div>
       <div class="block-card b" onclick="openModal('B')">
-        <div class="pct">65%</div>
-        <b>B. Thường xuyên</b>
-        <p style="font-size:12px;margin:6px 0 0;">Việc lặp lại hằng tháng.</p>
+        <div class="pct">85%</div>
+        <b>B. Công việc thường xuyên</b>
+        <p style="font-size:12px;margin:6px 0 0;">Việc lặp lại hàng tháng theo mô tả công việc vị trí. Tối đa 5 việc/tháng (gộp nhóm nếu việc nhỏ).</p>
         <span class="view-ex" style="color:var(--navy);">Xem ví dụ mẫu →</span>
       </div>
       <div class="block-card c" onclick="openModal('C')">
         <div class="pct">15%</div>
-        <b>C. Tuân thủ & Phát triển</b>
-        <p style="font-size:12px;margin:6px 0 0;">Áp dụng chung cho mọi người.</p>
+        <b>C. Tuân thủ và Phát triển cá nhân</b>
+        <p style="font-size:12px;margin:6px 0 0;">Tuân thủ nội quy lao động và đào tạo nội bộ. Tỉ trọng cố định.</p>
         <span class="view-ex" style="color:var(--red);">Xem ví dụ mẫu →</span>
       </div>
     </div>
@@ -289,29 +299,25 @@
   <!-- ============ PANEL 3 ============ -->
   <div class="panel" id="panel3">
     <h2 class="ptitle">Deadline & nộp muộn</h2>
-    <p class="lead">Hệ thống nhắc lịch <b>2 lần tự động</b> mỗi tháng — nộp muộn vẫn được chấp nhận, nhưng để lại dấu vết trên hệ thống.</p>
+    <p class="lead">Hệ thống nhắc lịch <b>2 lần tự động</b> mỗi tháng qua email — nộp sau hạn ngày 5 sẽ bị gắn nhãn và ảnh hưởng trực tiếp đến điểm Tuân thủ.</p>
 
     <div class="deadline-box">
       <div class="dcard">
-        <div class="day">Ngày cuối tháng</div>
-        <div class="label">8h00 sáng — nhắc <b>đăng ký KPI tháng mới</b> đến toàn bộ CBNV.</div>
+        <div class="day">Ngày cuối cùng của tháng</div>
+        <div class="label">Hệ thống tự động gửi mail nhắc <b>đánh giá và đăng ký KPI tháng tới</b> đến từng cá nhân.</div>
       </div>
       <div class="dcard">
-        <div class="day">Ngày 5 hàng tháng</div>
-        <div class="label">8h00 sáng — email nhắc <b>đây là hạn cuối</b> đăng ký & đánh giá KPI.</div>
+        <div class="day">Ngày 5 tháng tiếp theo</div>
+        <div class="label">Hệ thống tự động gửi mail <b>"hạn cuối"</b> đánh giá và đăng ký KPI. Cá nhân gửi sau ngày 5 bị gắn nhãn <b>"Nộp muộn"</b> — là cơ sở để trừ điểm phần Tuân thủ (Khối C).</div>
       </div>
     </div>
 
     <button class="btn-ghost" onclick="openModal('late')">Xem ví dụ tình huống nộp muộn →</button>
-
-    <div class="fact-box" style="margin-top:16px;">
-      <b>Theo quy trình hiện hành:</b> qua hạn ngày 5, anh/chị vẫn nộp bình thường. Hệ thống <b>không khóa quyền nộp</b> — chỉ gắn nhãn <b>"Nộp muộn"</b> để Quản lý và HR theo dõi, không tự động trừ điểm.
-    </div>
   </div>
 </main>
 
 <footer>
-  Soạn bởi Phòng Nhân sự & Văn hoá - Cao đẳng Việt Mỹ 1APC - EQuest · Cập nhật: 02/07/2026
+  Soạn bởi Văn phòng Tổng hiệu trưởng — Equest Cao đẳng · Cập nhật: 02/07/2026
 </footer>
 
 <!-- MODAL -->
@@ -377,8 +383,8 @@ const modalData = {
   late:{
     label:'Ví dụ minh họa — nộp muộn', color:'#8B1A2B',
     html:`<p style="font-size:13.5px;">Ngày 5/07, một CBNV minh họa (Nguyễn Văn A) chưa đăng ký KPI tháng 07. Đến ngày 8/07, CBNV này mới vào hệ thống và ấn "Gửi Quản lý".</p>
-    <p style="font-size:13.5px;"><b>Hệ thống xử lý:</b> đăng ký vẫn được ghi nhận bình thường, không bị chặn. Trên màn hình admin của Quản lý và HR, dòng đăng ký này hiển thị kèm nhãn <b style="color:#8B1A2B;">"Nộp muộn"</b>.</p>
-    <p style="font-size:13.5px;"><b>Không có bước trừ điểm tự động nào xảy ra</b> — nhãn chỉ phục vụ mục đích theo dõi tần suất trễ hạn của từng người/bộ phận.</p>`
+    <p style="font-size:13.5px;"><b>Hệ thống xử lý:</b> đăng ký vẫn được ghi nhận, không bị chặn. Trên màn hình admin của Quản lý và HR, dòng đăng ký này hiển thị kèm nhãn <b style="color:#8B1A2B;">"Nộp muộn"</b>.</p>
+    <p style="font-size:13.5px;">Nhãn <b>"Nộp muộn"</b> là cơ sở để trừ điểm mục <b>Tuân thủ nội quy lao động</b> (Khối C.1) của CBNV này trong tháng đó.</p>`
   }
 };
 function openModal(key){
